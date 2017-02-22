@@ -1,9 +1,5 @@
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class JsonParserDemo {
@@ -12,7 +8,7 @@ public class JsonParserDemo {
         String input = curl("http://www.npr.org/sections/thetwo-way/2017/02/21/516433342/homeland-security-outlines-new-rules-tightening-enforcement-of-immigration-law");
         input = input.substring(input.indexOf("{")); // removes info before actual JSON
         Gson gson = new Gson();
-        Source s = gson.fromJson(input, Source.class);
+        Article s = gson.fromJson(input, Article.class);
         System.out.println(s);
         s.save();
     }
@@ -44,14 +40,14 @@ public class JsonParserDemo {
     }
 }
 
-class Source{
+class Article {
     private String title;
     private String author;
     private String date_published;
     private String domain;
     private String content;
 
-    public Source(){
+    public Article(){
     }
 
     @Override
@@ -62,12 +58,17 @@ class Source{
                 "Source: " + this.domain;
     }
 
+    /**
+     * Prints article object to file
+     * @throws IOException
+     */
     public void save() throws IOException {
         File outputfile = new File (this.title.replaceAll(" ", "-") + ".html");
         FileWriter fWriter = new FileWriter (outputfile);
         PrintWriter pWriter = new PrintWriter (fWriter);
         pWriter.println ("<h1>" + title + "</h1>\n" +
                 "<h2>" + author + " via " + domain + "</h2>" +
+                "<h2>" + date_published.replaceAll("[a-zA-Z].*", "") + "</h2>" + // replaces datetime with just date
                 content);
         pWriter.close();
     }
