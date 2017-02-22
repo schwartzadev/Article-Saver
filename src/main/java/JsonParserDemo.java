@@ -14,6 +14,7 @@ public class JsonParserDemo {
         Gson gson = new Gson();
         Source s = gson.fromJson(input, Source.class);
         System.out.println(s);
+        s.save();
     }
 
     /**
@@ -23,7 +24,7 @@ public class JsonParserDemo {
      * @throws IOException
      */
     public static String curl(String link) throws IOException {
-        String curl = "curl -H \"x-api-key: key\" \"https://mercury.postlight.com/parser?url=" + link + "\"";
+        String curl = "curl -H \"x-api-key: JpHSuA0sDNPt4w1tOlWTwTSGt8HMRpUPmyNynbb3\" \"https://mercury.postlight.com/parser?url=" + link + "\"";
         ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", curl);
         builder.redirectErrorStream(true);
         Process p = builder.start();
@@ -48,6 +49,7 @@ class Source{
     private String author;
     private String date_published;
     private String domain;
+    private String content;
 
     public Source(){
     }
@@ -58,5 +60,15 @@ class Source{
                 "Author: " + this.author + "\n" +
                 "Date: " + this.date_published + "\n" +
                 "Source: " + this.domain;
+    }
+
+    public void save() throws IOException {
+        File outputfile = new File (this.title.replaceAll(" ", "-") + ".html");
+        FileWriter fWriter = new FileWriter (outputfile);
+        PrintWriter pWriter = new PrintWriter (fWriter);
+        pWriter.println ("<h1>" + title + "</h1>\n" +
+                "<h2>" + author + " via " + domain + "</h2>" +
+                content);
+        pWriter.close();
     }
 }
