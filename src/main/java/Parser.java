@@ -16,6 +16,7 @@ public class Parser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        linksCount.linksCount++;
     }
 
     /**
@@ -57,10 +58,8 @@ class Article {
 
     @Override
     public String toString() {
-        return "Name: " + this.title + "\n" +
-                "Author: " + this.author + "\n" +
-                "Date: " + this.date_published + "\n" +
-                "Source: " + this.domain;
+        return "[" + linksCount.linksCount + "/" + linksTotal.linksTotal + "}\n\t" +
+                this.title;
     }
 
     /**

@@ -7,6 +7,8 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.*;
 
+
+
 public class GetLinks {
 
     /**
@@ -34,10 +36,10 @@ public class GetLinks {
         }
         Set<String> fin = new HashSet<>();
         for (int i = 0; i<result.size(); i++) {
-            fin.add(result.get(i).substring(29)); //remove first 29 characters: "https://www.google.com/url?q="
+            fin.add(result.get(i).substring(29).replaceAll("&sa=.*", "")); //remove first 29 characters: "https://www.google.com/url?q=", and remove Google News ending
         }
-
-        System.out.println(Arrays.toString(fin.toArray()));
+        linksTotal.linksTotal = fin.size()+1;
+        linksCount.linksCount = 1;
         return fin;
     }
 
