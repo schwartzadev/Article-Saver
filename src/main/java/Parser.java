@@ -2,15 +2,20 @@ import com.google.gson.*;
 import java.io.*;
 
 
-public class JsonParserDemo {
+public class Parser {
 
-    public static void main(String[] args) throws IOException{
-        String input = curl("http://www.npr.org/sections/thetwo-way/2017/02/21/516433342/homeland-security-outlines-new-rules-tightening-enforcement-of-immigration-law");
-        input = input.substring(input.indexOf("{")); // removes info before actual JSON
-        Gson gson = new Gson();
-        Article s = gson.fromJson(input, Article.class);
-        System.out.println(s);
-        s.save();
+    public static void Parse(String link) {
+        String input;
+        try {
+            input = curl(link);
+            input = input.substring(input.indexOf("{")); // removes info before actual JSON
+            Gson gson = new Gson();
+            Article s = gson.fromJson(input, Article.class);
+            System.out.println(s);
+            s.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -59,17 +64,25 @@ class Article {
     }
 
     /**
-     * Prints article object to file
+     * Prints article object to html file
      * @throws IOException
      */
-    public void save() throws IOException {
-        File outputfile = new File (this.title.replaceAll(" ", "-") + ".html");
-        FileWriter fWriter = new FileWriter (outputfile);
-        PrintWriter pWriter = new PrintWriter (fWriter);
-        pWriter.println ("<h1>" + title + "</h1>\n" +
-                "<h2>" + author + " via " + domain + "</h2>" +
-                "<h2>" + date_published.replaceAll("[a-zA-Z].*", "") + "</h2>" + // replaces datetime with just date
-                content);
-        pWriter.close();
+    public void save() {
+        try {
+            File outputfile = new File(this.title.replaceAll(" ", "-") + ".html");
+            FileWriter fWriter = null;
+            fWriter = new FileWriter(outputfile);
+            PrintWriter pWriter = new PrintWriter(fWriter);
+            pWriter.println("<h1>" + title + "</h1>\n" +
+                    "<h2>" + author + " via " + domain + "</h2>" +
+                    "<h2>" + date_published/*.replaceAll("[a-zA-Z].*", "")*/ + "</h2>" + // replaces datetime with just date
+                    content);
+            pWriter.close();
+        } catch (NullPointerException n) {
+            n.printStackTrace();
+        } catch (IOException i) {
+            i.printStackTrace();
+            i.printStackTrace();
+        }
     }
 }
