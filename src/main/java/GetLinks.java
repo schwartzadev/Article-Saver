@@ -13,12 +13,11 @@ public class GetLinks {
 
     /**
      * Takes in a search term, returns list of URLs to be parsed
-     * @param search - query for Google News
      * @return list of sources to be parsed
      * @throws IOException
      */
-    public static Set<String> googleLinkGetter(String search) {
-        String url = "https://www.google.com/search?tbm=nws&q=" + search;
+    public static ArrayList<String> googleLinkGetter() {
+        String url = "https://www.google.com/search?tbm=nws&q=" + Main.search;
         Document doc = null;
         try { doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
                     .referrer("http://www.google.com")
@@ -28,19 +27,17 @@ public class GetLinks {
         }
         Elements links = doc.select("a[href]");
 
-        List<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<String>();
         for (Element link : links) {
             if (String.valueOf(link.attr("abs:href")).matches("https://www.google.com/url\\?q=http.*")) { //remove non news links
                 result.add(String.valueOf(link.attr("abs:href")));
             }
         }
-        Set<String> fin = new HashSet<>();
         for (int i = 0; i<result.size(); i++) {
-            fin.add(result.get(i).substring(29).replaceAll("&sa=.*", "")); //remove first 29 characters: "https://www.google.com/url?q=", and remove Google News ending
+            result.set(1,((result.get(i).substring(29).replaceAll("&sa=.*", "")))); //remove first 29 characters: "https://www.google.com/url?q=", and remove Google News ending
         }
-        Vars.linksTotal = fin.size()+1;
+        Vars.linksTotal = result.size()+1;
         Vars.linksCount = 1;
-        return fin;
+        return result;
     }
-
 }

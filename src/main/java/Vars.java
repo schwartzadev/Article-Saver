@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,5 +8,6 @@ import java.util.Set;
 public class Vars {
     public static int linksCount; // for pretty output
     public static int linksTotal; // for pretty output
-    public static Set<String> articleNames = new HashSet<>(); // for holding original article's titles for directory
+    public static ArrayList<String> articleNames = new ArrayList<String>(); // for holding original article's titles for directory
+
 }

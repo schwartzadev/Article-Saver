@@ -6,13 +6,13 @@
  * TODO fix titles--remove all chars but [a-zA-Z] and '-'
  */
 public class Main {
+    public static String search = "China";
     public static void main(String[] args) {
-        for (String s : GetLinks.googleLinkGetter("China")) {
+        /*for (String s : GetLinks.googleLinkGetter()) {
             Parser.Parse(s);
             System.out.println(s);
-        }
-        System.out.println((DirectoryMaker.ls()));
-        DirectoryMaker.saveToFile(Vars.articleNames);
-        System.out.println(Vars.articleNames);
+        }*/
+        System.out.println(DirectoryMaker.filter(DirectoryMaker.ls()));
+        DirectoryMaker.saveToFile(Vars.articleNames, search);
     }
 }
