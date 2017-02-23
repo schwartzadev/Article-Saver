@@ -9,5 +9,5 @@ public class Vars {
     public static int linksCount; // for pretty output
     public static int linksTotal; // for pretty output
     public static ArrayList<String> articleNames = new ArrayList<String>(); // for holding original article's titles for directory
-
+    public static ArrayList<Article> articles = new ArrayList<Article>();
 }
