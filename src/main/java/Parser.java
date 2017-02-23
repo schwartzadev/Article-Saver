@@ -16,7 +16,7 @@ public class Parser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        linksCount.linksCount++;
+        Vars.linksCount++;
     }
 
     /**
@@ -58,7 +58,7 @@ class Article {
 
     @Override
     public String toString() {
-        return "[" + linksCount.linksCount + "/" + linksTotal.linksTotal + "}\n\t" +
+        return "[" + Vars.linksCount + "/" + Vars.linksTotal + "]\n\t" +
                 this.title;
     }
 
@@ -68,6 +68,7 @@ class Article {
      */
     public void save() {
         try {
+            Vars.articleNames.add(this.title);
             File outputfile = new File("doc/" + this.title.replaceAll("[^a-zA-Z0-9]", "-").replaceAll("(-)\\1+", "-") + ".html");
             FileWriter fWriter = null;
             fWriter = new FileWriter(outputfile);
