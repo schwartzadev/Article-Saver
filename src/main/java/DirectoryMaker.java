@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -49,5 +47,25 @@ public class IndexMaker {
             }
         set.removeAll(removeCandidates);
         return set;
+    }
+
+    public void saveToFile() {
+        try {
+            File outputfile = new File("directory.html");
+            FileWriter fWriter = null;
+            fWriter = new FileWriter(outputfile);
+            PrintWriter pWriter = new PrintWriter(fWriter);
+            pWriter.println("<h1>" + title + "</h1>\n" +
+                    "<style type=\"text/css\">body{margin:30px auto;max-width:700px;line-height:1.4;font-size:1.3em;color:#354247;padding:0px 10px}a{color:#1355A0}h1,h2,h3{line-height:1;margin: 1em 0 0 0}</style>" +
+                    "<h2>" + author + " via " + domain + "</h2>" +
+                    "<h2>" + date_published/*.replaceAll("[a-zA-Z].*", "")*/ + "</h2>" + // replaces datetime with just date
+                    content);
+            pWriter.close();
+        } catch (NullPointerException n) {
+            n.printStackTrace();
+        } catch (IOException i) {
+            i.printStackTrace();
+            i.printStackTrace();
+        }
     }
 }
