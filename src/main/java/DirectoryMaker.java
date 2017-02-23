@@ -46,7 +46,7 @@ public class DirectoryMaker {
         return arr;
     }
 
-    public static void saveToFile(ArrayList<String> names, String sectionTitle) {
+    public static void saveToFile(ArrayList<String> names, String sectionTitle, ArrayList<String> links) {
         try {
             File outputfile = new File("directory.html");
             FileWriter fWriter;
@@ -56,8 +56,8 @@ public class DirectoryMaker {
                     "<h2>" + sectionTitle + "</h2>" +
                     "<style type=\"text/css\">body{margin:30px auto;max-width:700px;line-height:1.4;font-size:1.3em;color:#354247;padding:0px 10px}a{color:#1355A0}h1,h2,h3{line-height:1;margin: 1em 0 0 0}</style>" +
                     "<ul>");
-            for (String str : names) {
-                pWriter.println("<li>" + str + "</li></br>");
+            for (int i=0; i<names.size(); i++) {
+                pWriter.println("<li><a href=\"" + Vars.articles.get(i).getLink() + "\">" + Vars.articles.get(i).getTitle() + "</a></li></br>");
             }
             pWriter.close();
         } catch (NullPointerException n) {
