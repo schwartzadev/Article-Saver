@@ -68,7 +68,7 @@ class Article {
      */
     public void save() {
         try {
-            File outputfile = new File("doc/" + this.title.replaceAll(" ", "-") + ".html");
+            File outputfile = new File("doc/" + this.title.replaceAll("[^a-zA-Z0-9]", "-").replaceAll("(-)\\1+", "-") + ".html");
             FileWriter fWriter = null;
             fWriter = new FileWriter(outputfile);
             PrintWriter pWriter = new PrintWriter(fWriter);
