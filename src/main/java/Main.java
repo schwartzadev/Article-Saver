@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /**
  * Created by andrew on 2/21/17.
  * TODO remove images from articles
@@ -9,9 +7,12 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) {
-        for (String s : GetLinks.googleLinkGetter("China Trump")) {
+        for (String s : GetLinks.googleLinkGetter("China")) {
             Parser.Parse(s);
-            // System.out.println(s);
+            System.out.println(s);
         }
+        System.out.println((DirectoryMaker.ls()));
+        DirectoryMaker.saveToFile(Vars.articleNames);
+        System.out.println(Vars.articleNames);
     }
 }
