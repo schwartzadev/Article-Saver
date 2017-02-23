@@ -54,7 +54,7 @@ public class DirectoryMaker {
             PrintWriter pWriter = new PrintWriter(fWriter);
             pWriter.println("<html>\n" +
                     "<head>\n" +
-                        "  <link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\">\n" +
+                        "  <link rel=\"stylesheet\" type=\"text/css\" href=\"doc/res/styles.css\">\n" +
                     "</head>\n" +
                     "<h1>File Directory</h1>\n" +
                     "<h2>" + sectionTitle + "</h2>\n" +
