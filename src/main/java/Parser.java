@@ -28,7 +28,7 @@ public class Parser {
      */
     // TODO move api key to separate file
     public static String curl(String link) throws IOException {
-        String curl = "curl -H \"x-api-key: JpHSuA0sDNPt4w1tOlWTwTSGt8HMRpUPmyNynbb3\" \"https://mercury.postlight.com/parser?url=" + link + "\"";
+        String curl = "curl -H \"x-api-key: " + Api.key + "\" \"https://mercury.postlight.com/parser?url=" + link + "\"";
         ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", curl);
         builder.redirectErrorStream(true);
         Process p = builder.start();
