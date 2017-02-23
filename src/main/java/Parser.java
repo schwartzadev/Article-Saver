@@ -26,6 +26,7 @@ public class Parser {
      * @return parsed link as JSON
      * @throws IOException
      */
+    // TODO move api key to separate file
     public static String curl(String link) throws IOException {
         String curl = "curl -H \"x-api-key: JpHSuA0sDNPt4w1tOlWTwTSGt8HMRpUPmyNynbb3\" \"https://mercury.postlight.com/parser?url=" + link + "\"";
         ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", curl);
@@ -77,9 +78,9 @@ class Article {
             FileWriter fWriter = null;
             fWriter = new FileWriter(outputfile);
             PrintWriter pWriter = new PrintWriter(fWriter);
-            pWriter.println("<h1>" + title + "</h1>\n" +
+            pWriter.println("<h1>" + title + "</h1>\n" + // TODO move css to external file
                     "<style type=\"text/css\">body{margin:30px auto;max-width:700px;line-height:1.4;font-size:1.3em;color:#354247;padding:0px 10px}a{color:#1355A0}h1,h2,h3{line-height:1;margin: 1em 0 0 0}</style>" +
-                    "<h2>" + author + " via " + domain + "</h2>" +
+                    "<h2>" + author + " via " + domain + "</h2>" + // TODO add <html>, <head>, etc tags
                     "<h2>" + date_published/*.replaceAll("[a-zA-Z].*", "")*/ + "</h2>" + // replaces datetime with just date
                     content);
             pWriter.close();

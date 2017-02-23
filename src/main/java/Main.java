@@ -3,9 +3,8 @@ import java.util.ArrayList;
 /**
  * Created by andrew on 2/21/17.
  * TODO remove images from articles
- * TODO edit spacing on articles for better reading
- * TODO remove duplicates from articles ArrayList
- * TODO fix times
+ * TODO remove duplicates from ArrayList
+ * TODO fix time output from parser
  */
 public class Main {
     public static String search = "sport";
