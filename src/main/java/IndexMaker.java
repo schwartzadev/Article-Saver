@@ -10,12 +10,11 @@ import java.util.Set;
  * Created by andrew on 2/22/17.
  */
 public class IndexMaker {
-    public static void main(String[] args) {
-
-
-    }
+    /**
+     * @usage ls passes the "ls" command line argument through the command line, and saves the returned file names to a set
+     * @return names of files in doc/ as a set
+     */
     public static Set<String> ls() {
-        // save all files in directory to a set
         try {
             String curl = "cd doc && ls";
             ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", curl);
@@ -23,10 +22,7 @@ public class IndexMaker {
             Process p = builder.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
             Set<String> set = new HashSet<>();
-            String line;
-            int linenum = 0;
             while (true) {
-                linenum++;
                 set.add(r.readLine());
                 if (r.readLine() == null) {
                     break;
@@ -36,13 +32,19 @@ public class IndexMaker {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return null; // satisfies return requirement but wil never be triggered
     }
 
-    public static Set<String> sort(Set<String> set) {
+    /**
+     * @usage filter takes in a Set and returns the same Set, with select values removed. These include null values
+     *        and any values whose length is < 5 since they cannot be a .html file.
+     * @param set the set to be filtered
+     * @return
+     */
+    public static Set<String> filter(Set<String> set) {
         Collection<String> removeCandidates = new LinkedList<String>();
         for(String element : set)
-            if(element == null || element.length()<5) {
+            if(element == null || element.length() < 5) {
                 removeCandidates.add(element);
             }
         set.removeAll(removeCandidates);
