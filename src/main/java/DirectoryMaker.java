@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Created by andrew on 2/22/17.
  */
-public class IndexMaker {
+public class DirectoryMaker {
     /**
      * @usage ls passes the "ls" command line argument through the command line, and saves the returned file names to a set
      * @return names of files in doc/ as a set
@@ -49,17 +49,17 @@ public class IndexMaker {
         return set;
     }
 
-    public void saveToFile() {
+    public static void saveToFile(Set<String> s) {
         try {
             File outputfile = new File("directory.html");
-            FileWriter fWriter = null;
+            FileWriter fWriter;
             fWriter = new FileWriter(outputfile);
             PrintWriter pWriter = new PrintWriter(fWriter);
-            pWriter.println("<h1>" + title + "</h1>\n" +
-                    "<style type=\"text/css\">body{margin:30px auto;max-width:700px;line-height:1.4;font-size:1.3em;color:#354247;padding:0px 10px}a{color:#1355A0}h1,h2,h3{line-height:1;margin: 1em 0 0 0}</style>" +
-                    "<h2>" + author + " via " + domain + "</h2>" +
-                    "<h2>" + date_published/*.replaceAll("[a-zA-Z].*", "")*/ + "</h2>" + // replaces datetime with just date
-                    content);
+            pWriter.println("<h1>File Directory</h1>\n" +
+                    "<style type=\"text/css\">body{margin:30px auto;max-width:700px;line-height:1.4;font-size:1.3em;color:#354247;padding:0px 10px}a{color:#1355A0}h1,h2,h3{line-height:1;margin: 1em 0 0 0}</style>");
+            for (String str : s) {
+                pWriter.println(str + "</br>");
+            }
             pWriter.close();
         } catch (NullPointerException n) {
             n.printStackTrace();
