@@ -52,13 +52,18 @@ public class DirectoryMaker {
             FileWriter fWriter;
             fWriter = new FileWriter(outputfile);
             PrintWriter pWriter = new PrintWriter(fWriter);
-            pWriter.println("<h1>File Directory</h1>\n" +
-                    "<h2>" + sectionTitle + "</h2>" +
-                    "<style type=\"text/css\">body{margin:30px auto;max-width:700px;line-height:1.4;font-size:1.3em;color:#354247;padding:0px 10px}a{color:#1355A0}h1,h2,h3{line-height:1;margin: 1em 0 0 0}</style>" +
+            pWriter.println("<html>\n" +
+                    "<head>\n" +
+                        "  <style type=\"text/css\">body{margin:30px auto;max-width:700px;line-height:1.4;font-size:1.3em;color:#354247;padding:0px 10px}a{color:#1355A0}h1,h2,h3{line-height:1;margin: 1em 0 0 0}li{margin-bottom:.5em}</style>\n" +
+                    "</head>\n" +
+                    "<h1>File Directory</h1>\n" +
+                    "<h2>" + sectionTitle + "</h2>\n" +
                     "<ul>");
             for (int i=0; i<names.size(); i++) {
-                pWriter.println("<li><a href=\"" + Vars.articles.get(i).getLink() + "\">" + Vars.articles.get(i).getTitle() + "</a></li></br>");
+                pWriter.println("  <li><a href=\"" + Vars.articles.get(i).getLink() + "\">" + Vars.articles.get(i).getTitle() + "</a></li>");
             }
+            pWriter.println("</ul>\n" +
+                    "</html>");
             pWriter.close();
         } catch (NullPointerException n) {
             n.printStackTrace();
