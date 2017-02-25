@@ -81,9 +81,13 @@ class Article {
                     "<head>\n" +
                     "  <link rel=\"stylesheet\" type=\"text/css\" href=\"res/styles.css\">\n" +
                     "</head>\n" +
-                    "<h1>" + title + "</h1>\n" +
-                    "<h2>" + author + " via " + domain + "</h2>" +
-                    "<h2>" + date_published/*.replaceAll("[a-zA-Z].*", "")*/ + "</h2>\n" + // replaces datetime with just date
+                    "<h1>" + title + "</h1>");
+            if (this.author!=null) {
+                pWriter.println("<h2>" + author + " via " + domain + "</h2>");
+            } else {
+                pWriter.println("<h2>" + domain + "</h2>");
+            }
+            pWriter.println("<h2>" + date_published/*.replaceAll("[a-zA-Z].*", "")*/ + "</h2>\n" + // replaces datetime with just date
                     content);
             pWriter.close();
         } catch (NullPointerException n) {
@@ -92,15 +96,12 @@ class Article {
             i.printStackTrace();
         }
     }
-
     public String getLink() {
         return link;
     }
-
     public String getTitle() {
         return title;
     }
-
     public void setLink(String link) {
         this.link = link;
     }
