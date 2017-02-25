@@ -69,6 +69,12 @@ class Article {
      * @throws IOException
      */
     public void save() {
+        if (date_published!=null) {
+            date_published = date_published.substring(0, 10); //fix date
+        } else {
+            date_published = "No Date";
+        }
+
         try {
             Vars.articleNames.add(this.title);
             String link = "doc/" + this.title.replaceAll("[^a-zA-Z0-9]", "-").replaceAll("(-)\\1+", "-") + ".html";
@@ -87,7 +93,7 @@ class Article {
             } else {
                 pWriter.println("<h2>" + domain + "</h2>");
             }
-            pWriter.println("<h2>" + date_published/*.replaceAll("[a-zA-Z].*", "")*/ + "</h2>\n" + // replaces datetime with just date
+            pWriter.println("<h2>" + date_published + "</h2>\n" +
                     content);
             pWriter.close();
         } catch (NullPointerException n) {
