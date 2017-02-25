@@ -33,12 +33,12 @@ public class GetLinks {
                 result.add(String.valueOf(link.attr("abs:href")));
             }
         }
-        ArrayList<String> fin = new ArrayList<String>();
         for (int i = 0; i<result.size(); i++) {
-            fin.add(((result.get(i).substring(29).replaceAll("&sa=.*", "")))); //remove first 29 characters: "https://www.google.com/url?q=", and remove Google News ending
+            result.set(i, ((result.get(i).substring(29).replaceAll("&sa=.*", "")))); //remove first 29 characters: "https://www.google.com/url?q=", and remove Google News ending
         }
-        Vars.linksTotal = fin.size()+1;
+        result = new ArrayList<String>(new LinkedHashSet<String>(result)); // removes duplicates since LinkedHashSet cannot contain duplicates
+        Vars.linksTotal = result.size();
         Vars.linksCount = 1;
-        return fin;
+        return result;
     }
 }
