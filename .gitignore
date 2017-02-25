@@ -1,4 +1,5 @@
 /doc/**
 /target/**
-.idea/*
+.idea/**
 directory.html
+saver.iml
